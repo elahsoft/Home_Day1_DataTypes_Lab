@@ -11,7 +11,7 @@ describe("Data types tests ", function() {
   describe("Case for some falsy values", function() {
 
     it("should return 'no value' for null", function() {
-      expect(myApp.dataTypes(null)).to.equal('no value');
+      expect(myApp.dataTypes(null)).to.be.equal('no value');
     })
 
     it("should return 'no value' for undefined", function() {
@@ -59,5 +59,56 @@ describe("Data types tests ", function() {
     })
   }
   )
+
+
+  describe("Case for Strings", function() {
+
+    it("should return the length of `tergiversate`", function() {
+      expect(myApp.dataTypes('tergiversate')).to.be.equal(12);
+    })
+
+    it("should return the length of an empty string", function() {
+      expect(myApp.dataTypes('')).to.be.equal(0);
+    })
+
+    it("should return the length of `555`", function() {
+      expect(myApp.dataTypes('555')).to.be.equal(3);
+    })
+
+  })
+
+  describe("Case for arrays", function() {
+
+    it("should return `2` for `[0, 1, 2]`", function() {
+      expect(myApp.dataTypes([0, 1, 2])).to.be.equal(2);
+    })
+
+    it("should return `undefined` for `[]`", function() {
+      expect(myApp.dataTypes([])).not.to.be.defined;
+    })
+
+    it("should return `undefined` for `[4, 9]`", function() {
+      expect(myApp.dataTypes([4, 9])).not.to.be.defined;
+    })
+
+  })
+
+
+  describe("Case for functions", function() {
+
+    it("should call the `callback` function with argument true, and return `called callback`", function() {
+      var callback = function(arg) {
+        expect(arg).to.be.ok;
+        if(arg === true) {
+          return 'called callback';
+        }
+      }
+      expect(myApp.dataTypes(callback)).to.be.equal('called callback');
+    })
+
+  })
+
+
+
 
 })
